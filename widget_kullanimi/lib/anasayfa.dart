@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 
 class Anasayfa extends StatefulWidget {
@@ -12,6 +14,13 @@ class _AnasayfaState extends State<Anasayfa> {
   var tfController = TextEditingController();
   String alinanVeri = "";
   String resimAdi = "baklava.png";
+  bool switchKontrol = false;
+  bool checkboxKontrol = false;
+  int radioDeger = 0;
+  bool progressKontrol = false;
+  double ilerleme = 30.0;
+  var tfSaat = TextEditingController();
+  var tfTarih = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +65,116 @@ class _AnasayfaState extends State<Anasayfa> {
 
               ],
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SizedBox(
+                  width: 150,
+                  child: SwitchListTile(
+                      title: const Text("Dart"),
+                      controlAffinity: ListTileControlAffinity.leading, //ikon solda dursun dedik
+                      value: switchKontrol,
+                      onChanged: (veri){
+                        setState(() {
+                          switchKontrol = veri;
+                        });
+                      }),
+                ),
+                SizedBox(
+                  width: 150,
+                  child: CheckboxListTile(
+                      title: const Text("Flutter"),
+                      controlAffinity: ListTileControlAffinity.leading, //ikon solda dursun dedik
+                      value: checkboxKontrol,
+                      onChanged: (veri){
+                        setState(() {
+                          checkboxKontrol = veri!;
+                        });
+                      }),
+                ),
+  
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  width: 180,
+                  child: RadioListTile(
+                      title: const Text("Barcelona", style: TextStyle(fontSize: 14),),
+                      value: 1,
+                      groupValue: radioDeger,
+                      onChanged: (veri){
+                        setState(() {
+                          radioDeger = veri!;
+                        });
+                      }),
+                ),
+                SizedBox(
+                  width: 180,
+                  child: RadioListTile(
+                      title: const Text("Real Madrid", style: TextStyle(fontSize: 14),),
+                      value: 2,
+                      groupValue: radioDeger,
+                      onChanged: (veri){
+                        setState(() {
+                          radioDeger = veri!;
+                        });
+                      }),
+                ),
+
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(onPressed: (){
+                  setState(() {
+                    progressKontrol = true;
+                  });
+                }, child: const Text("Başla")),
+                Visibility(visible: progressKontrol, child: const CircularProgressIndicator()),
+                ElevatedButton(onPressed: (){
+                  setState(() {
+                    progressKontrol = false;
+                  });
+                }, child: const Text("Dur")),
+
+              ],
+            ),
+            Text(ilerleme.toInt().toString()),
+            Slider(max: 100.0, min: 0.0, value: ilerleme, onChanged: (veri){
+              setState(() {
+                ilerleme = veri;
+              });
+            }),
+
+            Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SizedBox(width: 120,
+                  child: TextField(
+                    controller: tfSaat,
+                    decoration: const InputDecoration(hintText: "Saat"),
+                  ),
+                ),
+                IconButton(onPressed: (){}, icon: const Icon(Icons.access_time)),
+                SizedBox(width: 120,
+                  child: TextField(controller: tfTarih,decoration: const InputDecoration(hintText: "Tarih"),),
+                ),
+                IconButton(onPressed: (){}, icon: const Icon(Icons.date_range)),
+              ],
+            ),
+
+
+
+
+
+            ElevatedButton(onPressed: (){
+              print("Switch durum: $switchKontrol");
+              print("Checkbox durum: $checkboxKontrol");
+              print("Radio durum: $radioDeger");
+              print("Slider durum: $ilerleme");
+            }, child: const Text("Göster")),
           ],
         ),
       ),
