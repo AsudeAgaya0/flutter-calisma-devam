@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const KullaniciEtkilesimiSayfa(),//ilk çalışacak olan sayfa anasayfa, buraya bağlanmış oldu
+      home: const Anasayfa(),//ilk çalışacak olan sayfa anasayfa, buraya bağlanmış oldu
     );
   }
 }
